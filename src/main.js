@@ -6,14 +6,14 @@ import BootstrapVue from 'bootstrap-vue/dist/bootstrap-vue.esm';
 import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap-vue/dist/bootstrap-vue.css';
 import VueResource from 'vue-resource';
-import { apiHost } from '../config.js';
+import { baseUrl } from '../config.js';
 
 
 Vue.use(BootstrapVue);
 
 Vue.use(VueResource);
 // API main root
-Vue.http.options.root = apiHost;
+Vue.http.options.root = baseUrl;
 
 new Vue({
   el: '#app',

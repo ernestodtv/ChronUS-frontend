@@ -41,6 +41,7 @@
 </template>
 <script>
 import Vue from 'vue';
+import { wsHost } from '../../../config.js';
 
 export default {
     name: 'collaboration-details',
@@ -110,7 +111,7 @@ export default {
         },
         openSocketConnection() {
             this.chatSocket = new WebSocket(
-                'ws://127.0.0.1:8000'
+                `ws://${wsHost}`
                 + '/ws/collaborations/'
                 + this.$route.params.id
                 + '/?token='
