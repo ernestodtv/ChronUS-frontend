@@ -111,7 +111,7 @@ export default {
         },
         openSocketConnection() {
             this.chatSocket = new WebSocket(
-                `ws://${wsHost}`
+                wsHost
                 + '/ws/collaborations/'
                 + this.$route.params.id
                 + '/?token='
