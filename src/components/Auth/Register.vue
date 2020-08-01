@@ -73,12 +73,23 @@
                             </select>
                         </div>
 
-                        <!-- <div class="form-group">
-                            <div class="custom-file">
-                                <input type="file" class="custom-file-input" id="profile-image">
-                                <label class="custom-file-label" for="profile-image">Puedes elegir una imagen</label>
-                            </div>
-                        </div> -->
+                        <div class="form-group">    
+                            <label for="profile-image">Puedes seleccionar una imagen de perfil</label>
+                            <VueUploadMultipleImage
+                                name="profile-image"
+                                :data-images="image"
+                                dragText="Selecciona una imagen"
+                                :browseText="''"
+                                :showPrimary="false"
+                                :multiple="false"
+                                dropText="Suelta aquí la imagen"
+                                :idUpload="'profile-image-upload'"
+                                :idEdit="'profile-image-edit'"
+                                @upload-success="uploadProfileImageSuccess"
+                                @edit-image="uploadProfileImageSuccess"
+                                @before-remove="beforeProfileImageRemove"
+                            ></VueUploadMultipleImage>
+                        </div>
                         <div class="form-group">
                             <label for="description">Descripción</label>
                             <textarea class="form-control" id="description" v-model="description"></textarea>
@@ -100,6 +111,7 @@ import Vue from 'vue';
 import { ValidationObserver, ValidationProvider } from 'vee-validate';
 import { min } from '@/validation/validation';
 import degrees from '@/data/degrees';
+import VueUploadMultipleImage from 'vue-upload-multiple-image';
 
 export default {
     name: 'register',
@@ -115,13 +127,16 @@ export default {
            finished_degrees: [],
            competences: [],
            selected_competences: [],
+           profile_image: '',
+           image: [],
            description: '',
            error: null
         };
     },
     components: {
         ValidationObserver,
-        ValidationProvider
+        ValidationProvider,
+        VueUploadMultipleImage
     },
     mounted() {
         this.fetchCompetences();
@@ -144,6 +159,7 @@ export default {
                         email: this.email,
                         password: this.password,
                     },
+                    profile_image: this.profile_image,
                     degrees: this.buildDegrees(),
                     competences: this.buildCompetences(),
                     description: this.description
@@ -179,7 +195,26 @@ export default {
                 competences.push(competenceObj);
             });
             return competences;
-        }
+        },
+        async uploadProfileImageSuccess (formData, index, fileList) {
+            let file = formData.get('file')
+            await this.codeAndAssign(file)
+        },
+        codeAndAssign(file) {
+            new Promise((resolve, reject) => {
+                let reader = new FileReader()
+                reader.readAsDataURL(file)
+                reader.onload = () => {
+                    this.profile_image = reader.result
+                    resolve(reader.result)
+                }
+                reader.onerror = error => reject(error)
+            })
+        },
+        beforeProfileImageRemove (index, done, fileList) {
+            done()
+            this.profile_image = ""
+        },
     }
 }
 </script>
