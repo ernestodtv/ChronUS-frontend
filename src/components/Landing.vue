@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="landing">
         <div class="bg-image">
             <div class="bg-gradient">
                 <div class="container">
@@ -22,6 +22,9 @@ export default {
 }
 </script>
 <style scoped>
+    .landing {
+        margin-top: -50px;
+    }
     .bg-image {
         background-image: url('../assets/landing.jpg');
         background-repeat: no-repeat;
