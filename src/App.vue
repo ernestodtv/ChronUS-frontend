@@ -20,3 +20,8 @@ export default {
   }
 }
 </script>
+<style scoped>
+  #app {
+    padding-bottom: 100px;
+  }
+</style>

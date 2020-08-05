@@ -106,6 +106,10 @@ export default {
 }
 </script>
 <style scoped>
+    .navbar {
+        margin-bottom: 50px;
+    }
+
     .nav-link {
         color: #303c6c!important;
         font-weight: 700;
