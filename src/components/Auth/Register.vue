@@ -98,7 +98,7 @@
                             <div class="alert alert-danger" v-if="error">Algo ha fallado. Vuelve a intentarlo</div>
                         </div>
                         <div class="text-center">
-                            <button type="submit" class="btn btn-info">Registrarme</button>
+                            <button type="submit" class="btn main-button">Registrarme</button>
                         </div>
                     </form>
                 </ValidationObserver>

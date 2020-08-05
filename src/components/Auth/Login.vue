@@ -25,7 +25,7 @@
                             <div class="alert alert-danger" v-if="error">Credenciales incorrectos. Vuelve a intentarlo</div>
                         </div>
                         <div class="text-center">
-                            <button type="submit" class="btn btn-info">Iniciar sesión</button>
+                            <button type="submit" class="btn main-button">Iniciar sesión</button>
                         </div>
                     </form>
                 </ValidationObserver>
@@ -64,3 +64,14 @@ export default {
     }
 }
 </script>
+<style>
+    .main-button {
+        color: #fff!important;
+        background-color: #303c6c!important;
+    }
+
+    .main-button:hover {
+        color: #fff!important;
+        background-color: #2b355f!important;
+    }
+</style>

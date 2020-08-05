@@ -42,7 +42,7 @@
                     <span v-if="error" class="text-danger">{{ error }}</span>
                 </div>
                 <div class="text-center">
-                    <button type="submit" class="btn btn-info">Publicar</button>
+                    <button type="submit" class="btn main-button">Publicar</button>
                 </div>
             </form>
         </ValidationObserver>
