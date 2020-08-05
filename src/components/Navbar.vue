@@ -1,7 +1,7 @@
 <template>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <router-link v-if="loggedIn" :to="{ name: 'home' }" class="nav-link text-secondary"><BIconHouse font-scale="2"></BIconHouse></router-link>
-        <router-link v-else :to="{ name: 'landing' }" class="nav-link text-secondary"><BIconHouse font-scale="2"></BIconHouse></router-link>
+    <nav class="navbar navbar-expand-lg navbar-light">
+        <router-link v-if="loggedIn" :to="{ name: 'home' }" class="nav-link text-secondary"><img class="logo" src="@/assets/chronus.png"/></router-link>
+        <router-link v-else :to="{ name: 'landing' }" class="nav-link text-secondary"><img class="logo" src="@/assets/chronus.png"/></router-link>
         <div class="d-flex flex-grow-1">
             <div class="w-100 text-right">
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#myNavbar7">
@@ -11,7 +11,7 @@
         </div>
         <div class="collapse navbar-collapse flex-grow-1 text-right" id="myNavbar7">
             <ul class="navbar-nav ml-auto flex-nowrap">
-                <li v-if="!loggedIn" class="nav-item">
+                <li v-if="!loggedIn">
                     <router-link :to="{ name: 'login' }" class="nav-link">Iniciar sesión</router-link>
                 </li>
                 <li v-if="!loggedIn" class="nav-item">
@@ -34,7 +34,20 @@
                 <li v-if="loggedIn" class="nav-item">
                     <router-link :to="{ name: 'collaboration-list' }" class="nav-link">Mis colaboraciones</router-link>
                 </li>
-                <li v-if="loggedIn" class="nav-item"><button @click="logout()" class="btn btn-outline-danger my-2 my-sm-0">Cerrar sesión</button></li>
+                <template v-if="loggedIn">
+                    <li v-if="logged_student.profile_image" class="nav-item dropleft">
+                        <img class="profile-image dropdown-toggle"  href="#" id="imageDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" :src="logged_student.profile_image" alt="Avatar" />
+                        <div class="dropdown-menu" aria-labelledby="imageDropdown">
+                            <a class="dropdown-item logout" @click="logout()" >Cerrar sesión</a>
+                        </div>
+                    </li>
+                    <li v-else class="nav-item dropleft">
+                        <img class="default-image dropdown-toggle"  href="#" id="imageDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" src="@/assets/default_image.png" alt="Avatar" />
+                        <div class="dropdown-menu" aria-labelledby="imageDropdown">
+                            <a class="dropdown-item logout" @click="logout()" >Cerrar sesión</a>
+                        </div>
+                    </li>
+                </template>
             </ul>
         </div>
     </nav>
@@ -44,8 +57,23 @@ import { BIconHouse } from 'bootstrap-vue';
 
 export default {
     name: 'navbar',
+    data() {
+        return {
+            logged_student: {}
+        }
+    },
     components: {
         BIconHouse
+    },
+    mounted() {
+        if(this.loggedIn) {
+            this.$store.dispatch('retrieveLoggedStudent')
+            .then(response => {
+                this.logged_student = response.body;
+            }).catch(error => {
+                console.log(error);
+            });
+        }
     },
     methods: {
         logout() {
@@ -58,7 +86,48 @@ export default {
     computed: {
         loggedIn() {
             return this.$store.getters.loggedIn;
+        },
+    },
+    watch: {
+        loggedIn: function() {
+            if(this.loggedIn) {
+                this.$store.dispatch('retrieveLoggedStudent')
+                .then(response => {
+                    this.logged_student = response.body;
+                }).catch(error => {
+                    console.log(error);
+                });
+            } else {
+                this.logged_student = {}
+            }
         }
     }
+
 }
 </script>
+<style scoped>
+    .nav-link {
+        color: #303c6c!important;
+        font-weight: 700;
+    }
+
+    .logo {
+        height: 35px;
+    }
+
+    .profile-image {
+        border-radius: 50%;
+        height: 45px;
+        border: 2px solid #303c6c;
+    }
+
+    .default-image {
+        border-radius: 50%;
+        height: 45px;
+    }
+
+    .logout {
+        cursor: pointer;
+    }
+    
+</style>
