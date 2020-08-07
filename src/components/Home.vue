@@ -1,11 +1,34 @@
 <template>
-    <div v-if="logged_student.available_time" class="container">
-        <div class="row">
-            <div class="col-md-6 offset-md-3 text-center mt-5">
-                <h3>Bienvenid@ a Chronus, la red colaborativa de la Universidad de Sevilla</h3>
-                <h4 class="mt-5">Tiempo disponible:</h4>
-                <h5>{{ availableTime }}</h5>
-            </div>
+    <div class="home">
+        <div class="home-background">
+        </div>
+        <div v-if="logged_student.available_time" class="container">
+           <div class="row main-row">
+                <div class="offset-md-1 col-md-3">
+                    <img v-if="logged_student.profile_image" class="home-image mb-3" :src="logged_student.profile_image" alt="Profile"/>
+                    <img v-else class="home-image" src="@/assets/default_image.png" alt="Profile"/>
+                    <h4>Tiempo disponible:</h4>
+                    <h5>{{ availableTime }}</h5>
+                </div>
+                <div class="col-md-7">
+                    <h3 class="home-message">Bienvenid@ a Chronus, {{ logged_student.user.first_name }}</h3>
+                    <p>Chronus es la red colaborativa de la Universidad de Sevilla. En ella puedes intercambiar conocimiento con tus compañeros universitarios, haciendo uso del tiempo como moneda de cambio. </p>
+                    <p>
+                        <h6>Solicitudes de colaboración</h6>
+                        En el apartado "Solicitudes de colaboración" puedes explorar solicitudes que hayan publicado otros usuarios,
+                        visualizar las solicitudes que has publicado y realizar una nueva solicitud.
+                    </p>
+                    <p>
+                        <h6>Mis ofrecimientos de colaboración</h6>
+                        En el apartado "Mis ofrecimientos de colaboración" puedes visualizar los ofrecimientos que has hecho a solicitudes de colaboración de otros usuarios.
+                    </p>
+                    <p>
+                        <h6>Mis colaboraciones</h6>
+                        Cuando un usuario acepte un ofrecimiento de colaboración que le hayas hecho, se creará una colaboración. En el apartado "Mis colaboraciones"
+                        puedes acceder a tus colaboraciones en curso y chatear con otros usuarios.
+                    </p>
+                </div>
+            </div> 
         </div>
     </div>
 </template>
@@ -63,3 +86,33 @@ export default {
     }
 }
 </script>
+<style scoped>
+    .home {
+        margin-top: -50px;
+    } 
+
+    .home-background {
+        background-image: url('../assets/home.jpg');
+        background-repeat: no-repeat;
+        background-size: cover;
+        height: 200px;
+        position: absolute;
+        width: 100%;
+    }
+
+    .main-row {
+        position: relative;
+        bottom: -123px;
+    }
+
+    .home-image {
+        border-radius: 50%;
+        height: 180px;
+        border: 5px solid #f4976c;
+        
+    }
+
+    .home-message {
+        margin-top: 100px;
+    }
+</style>
