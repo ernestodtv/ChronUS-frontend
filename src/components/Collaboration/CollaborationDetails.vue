@@ -1,5 +1,5 @@
 <template>
-    <div class="container pt-5">
+    <div class="container collaboration">
         <div class="row" v-if="collaboration.title">
             <div class="col-12 mb-2"><h3>¡La colaboración ha empezado! Puedes escribir en el chat</h3></div>
             <div class="card col-md-5">
@@ -10,15 +10,19 @@
                 </div>
                 <div v-if="loggedIsApplicant">
                     <h5>Colabora contigo:</h5>
-                    <div>{{ collaboration.collaborator.full_name }}</div>
+                    <img v-if="collaboration.collaborator.profile_image" class="user-image" :src="collaboration.collaborator.profile_image" alt="User image"/>
+                    <img v-else class="user-image" src="@/assets/default_image.png" alt="User image"/>
+                    <div class="user-name">{{ collaboration.collaborator.full_name }}</div>
                 </div>
-                <div v-if="loggedIsCollaborator" >
+                <div v-if="loggedIsCollaborator">
                     <h5>Colaboras con:</h5>
-                    <div>{{ collaboration.applicant.full_name }}</div>
+                    <img v-if="collaboration.applicant.profile_image" class="user-image" :src="collaboration.applicant.profile_image" alt="User image"/>
+                    <img else class="user-image" src="@/assets/default_image.png" alt="User image"/>
+                    <div class="user-name">{{ collaboration.applicant.full_name }}</div>
                 </div>
                  <div class="mt-3">
                     <div v-if="collaboration.deadline"><h6>Fecha límite: </h6><span>{{ formattedDate }}</span></div>
-                    <div class ="mt-2" v-if="collaboration.requested_time"><h6>Tiempo solicitado: </h6><span>{{ requestedTime }}</span></div>
+                    <div class="mt-2" v-if="collaboration.requested_time"><h6>Tiempo solicitado: </h6><span>{{ requestedTime }}</span></div>
                 </div>
             </div>
             <div class="content col-md-7">
@@ -32,7 +36,7 @@
                 <div class="message-input">
                     <div class="wrap">
                         <input id="chat-message-input" type="text" placeholder="Escribe tu mensaje aquí..." @keyup.enter="clickSend()"/>
-                        <button id="chat-message-submit" class="btn btn-outline-secondary" @click="sendMessage()">Enviar</button>
+                        <button id="chat-message-submit" class="btn main-button" @click="sendMessage()">Enviar</button>
                     </div>
                 </div>
             </div>
@@ -204,8 +208,14 @@ export default {
 }
 </script>
 <style scoped>
+    .collaboration {
+        margin-top: -50px;
+    }
     .card {
         border: none;
+    }
+    .content {
+        background-color: #b4dfe5;
     }
     .content .messages {
         height: 500px;
@@ -236,15 +246,15 @@ export default {
     margin: 6px 8px 0 0;
     }
     .content .messages ul li.sent p {
-    background: #435f7a;
-    color: #f5f5f5;
+        background: white;
     }
     .content .messages ul li.replies img {
     float: right;
     margin: 6px 0 0 8px;
     }
     .content .messages ul li.replies p {
-    background: #f5f5f5;
+    background: #303c6c;
+    color: white;
     float: right;
     }
     .content .messages ul li img {
@@ -261,7 +271,8 @@ export default {
     }
     .content .message-input {
     position: absolute;
-    bottom: 0;
+    bottom: 7px;
+    left: 7px;
     width: 100%;
     z-index: 99;
     }
@@ -294,18 +305,29 @@ export default {
     opacity: 1;
     }
     .content .message-input .wrap button {
-    float: right;
-    border: none;
-    width: 50px;
-    padding: 12px 0;
-    cursor: pointer;
-    background: #32465a;
-    color: #f5f5f5;
+        border: none;
+        width: 77px;
+        height: 40px;
+        cursor: pointer;
+        background: #32465a;
+        color: #f5f5f5;
     }
     .content .message-input .wrap button:hover {
     background: #435f7a;
     }
     .content .message-input .wrap button:focus {
     outline: none;
+    }
+
+    .user-image {
+        border-radius: 50%;
+        height: 50px;
+        border: 2px solid #f4976c;
+        
+    }
+
+    .user-name {
+        display: inline;
+        margin-left: 5px;
     }
 </style>
