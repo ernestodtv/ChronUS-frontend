@@ -8,7 +8,11 @@
                 <div class="mt-auto">
                     <div>{{ requestedTime }}</div>
                     <div>{{ formattedDate }}</div>
-                    <div class="mt-3">{{ collaboration_request.applicant.full_name }}</div>
+                    <div class="mt-3">
+                        <img v-if="collaboration_request.applicant.profile_image" class="applicant-image" :src="collaboration_request.applicant.profile_image" alt="Applicant image"/>
+                        <img v-else class="applicant-image" src="@/assets/default_image.png" alt="Applicant image"/>
+                        <div class="applicant-name">{{ collaboration_request.applicant.full_name }}</div>
+                    </div>
                 </div>
             </div>
     </div>
@@ -102,5 +106,17 @@ export default {
     }
     .card:hover {
         box-shadow: 0 0 11px rgba(33,33,33,.2);
+    }
+
+    .applicant-image {
+        border-radius: 50%;
+        height: 50px;
+        border: 2px solid #f4976c;
+        
+    }
+
+    .applicant-name {
+        display: inline;
+        margin-left: 5px;
     }
 </style>

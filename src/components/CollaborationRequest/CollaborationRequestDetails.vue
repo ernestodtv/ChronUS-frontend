@@ -10,7 +10,9 @@
             </div>
             <div class="col-md-4" v-if="collaboration_request.applicant">
                 <h5>Publicada por:</h5>
-                <div v-if="collaboration_request.applicant">{{ collaboration_request.applicant.full_name }}</div>
+                <img v-if="collaboration_request.applicant.profile_image" class="applicant-image" :src="collaboration_request.applicant.profile_image" alt="Applicant image"/>
+                <img v-else class="applicant-image" src="@/assets/default_image.png" alt="Applicant image"/>
+                <div v-if="collaboration_request.applicant" class="applicant-name">{{ collaboration_request.applicant.full_name }}</div>
                 <div class="mt-5">
                     <div v-if="collaboration_request.deadline"><h6>Fecha límite: </h6><span>{{ formattedDate }}</span></div>
                     <div class ="mt-2" v-if="collaboration_request.requested_time"><h6>Tiempo solicitado: </h6><span>{{ requestedTime }}</span></div>
@@ -181,5 +183,15 @@ export default {
 <style scoped>
     .card {
         border: none;
+    }
+    .applicant-image {
+        border-radius: 50%;
+        height: 50px;
+        border: 2px solid #f4976c;
+        
+    }
+    .applicant-name {
+        display: inline;
+        margin-left: 5px;
     }
 </style>
