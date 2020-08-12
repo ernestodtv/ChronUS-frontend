@@ -17,7 +17,7 @@
                 <div v-if="loggedIsCollaborator">
                     <h5>Colaboras con:</h5>
                     <img v-if="collaboration.applicant.profile_image" class="user-image" :src="collaboration.applicant.profile_image" alt="User image"/>
-                    <img else class="user-image" src="@/assets/default_image.png" alt="User image"/>
+                    <img v-else class="user-image" src="@/assets/default_image.png" alt="User image"/>
                     <div class="user-name">{{ collaboration.applicant.full_name }}</div>
                 </div>
                  <div class="mt-3">
