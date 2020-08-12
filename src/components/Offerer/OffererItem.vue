@@ -23,7 +23,7 @@ export default {
         createCollaboration() {
             Vue.http.post('collaborations/',
                 {
-                    collaborator: this.offerer.id,
+                    collaborator_id: this.offerer.id,
                     collaboration_request: this.collaboration_request_id
                 },
                 {
