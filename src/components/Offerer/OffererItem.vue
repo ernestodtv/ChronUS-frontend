@@ -1,7 +1,9 @@
 <template>
     <div>
-        <button @click="createCollaboration()" class="btn btn-outline-success">Aceptar</button>
+        <img v-if="offerer.profile_image" class="offerer-image" :src="offerer.profile_image" alt="Offerer image"/>
+        <img v-else class="offerer-image" src="@/assets/default_image.png" alt="Offerer image"/>
         {{ offerer.full_name }}
+        <button @click="createCollaboration()" class="btn btn-sm btn-outline-success accept-button">Aceptar</button>
     </div>
 </template>
 <script>
@@ -42,3 +44,14 @@ export default {
     }
 }
 </script>
+<style>
+    .offerer-image {
+        border-radius: 50%;
+        height: 50px;
+        border: 2px solid #f4976c;
+    }
+
+    .accept-button {
+        margin-left: 5px;
+    }
+</style>
