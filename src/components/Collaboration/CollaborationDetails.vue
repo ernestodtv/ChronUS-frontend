@@ -1,7 +1,11 @@
 <template>
     <div class="container collaboration">
         <div class="row" v-if="collaboration.title">
-            <div class="col-12 mb-2"><h3>¡La colaboración ha empezado! Puedes escribir en el chat</h3></div>
+            <div class="col-12 mb-2">
+                <div class="alert alert-success" role="alert">
+                    Puedes escribir en el chat para comunicarte con el estudiante con el que stás colaborando.
+                </div>
+            </div>
             <div class="card col-md-5">
                 <img  v-if="collaboration.competences" style="height: 300px;" class="card-img-top" :src="collaborationImage()" :alt="collaboration.title">
                 <div class="card-body pl-0">
@@ -215,7 +219,7 @@ export default {
         border: none;
     }
     .content {
-        background-color: #b4dfe5;
+        background-color: #E8E8E8;
     }
     .content .messages {
         height: 500px;
@@ -329,5 +333,9 @@ export default {
     .user-name {
         display: inline;
         margin-left: 5px;
+    }
+
+    .alert-success {
+        width: 101%;
     }
 </style>
