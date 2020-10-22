@@ -61,6 +61,7 @@
                         <div class="form-group">
                             <label for="finished-degrees">Titulación/es acabada/s</label>
                             <select multiple class="form-control" id="finished-degrees" v-model="finished_degrees">
+                                <option value=""></option>
                                 <option v-for="(value, key) in degrees" :value="key" :key="key">{{ value }}</option>
                             </select>
                         </div>
@@ -182,8 +183,10 @@ export default {
 
             if (this.finished_degrees.length) {
                 this.finished_degrees.forEach(degreeName => {
-                    let finishedDegree = {name: degreeName, higher_grade: '', finished: true};
-                    degrees.push(finishedDegree);
+                    if (degreeName != "") {
+                        let finishedDegree = {name: degreeName, higher_grade: '', finished: true};
+                        degrees.push(finishedDegree);
+                    }
                 });
             }
             return degrees;
