@@ -1,7 +1,8 @@
 <template>
     <div class="container pt-5">
-        <div class="row">
-            <div 
+        <div class="row" v-if="loaded">
+            <div class="offset-md-3 col-md-6 text-center" v-if="!collaboration_requests.length">En este momento no hay solicitudes de colaboración</div>
+            <div v-else
                 v-for="collaboration_request in collaboration_requests"
                 :key="collaboration_request.id"
                 class="col-md-4 mb-4"
@@ -19,7 +20,8 @@ export default {
     name: 'collaboration-request-list',
     data() {
         return {
-            collaboration_requests: []
+            collaboration_requests: [],
+            loaded: false
         };
     },
     components: {
@@ -40,6 +42,7 @@ export default {
             )
             .then(response => {
                 this.collaboration_requests = response.body;
+                this.loaded = true;
             }).catch(error => {
                 console.log(error);
             });
