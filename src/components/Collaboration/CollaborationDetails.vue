@@ -3,7 +3,7 @@
         <div class="row" v-if="collaboration.title">
             <div class="col-12 mb-2">
                 <div class="alert alert-success" role="alert">
-                    Puedes escribir en el chat para comunicarte con el estudiante con el que stás colaborando.
+                    Puedes escribir en el chat para comunicarte con el estudiante con el que estás colaborando.
                 </div>
             </div>
             <div class="card col-md-5">
