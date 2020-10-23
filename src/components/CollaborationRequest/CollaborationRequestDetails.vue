@@ -18,13 +18,13 @@
                     <div class ="mt-2" v-if="collaboration_request.requested_time"><h6>Tiempo solicitado: </h6><span>{{ requestedTime }}</span></div>
                 </div>
                 <button v-if="showButton" 
-                        class="btn btn-outline-info mt-5"
+                        class="btn main-button mt-5"
                         @click="offerCollaboration()"
                 >
                     Ofrecer colaboración
                 </button>
                 <div v-if="showOfferText"
-                    class="text-info mt-5"
+                    class="mt-5 message"
                 >
                     Has ofrecido colaborar en esta solicitud de colaboración
                 </div>
