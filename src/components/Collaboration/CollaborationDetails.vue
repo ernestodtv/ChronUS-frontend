@@ -2,7 +2,7 @@
     <div class="container collaboration">
         <div class="row" v-if="collaboration.title">
             <div class="col-12 mb-2">
-                <div class="alert alert-success" role="alert">
+                <div class="alert alert-info" role="alert">
                     Puedes escribir en el chat para comunicarte con el estudiante con el que estás colaborando.
                 </div>
             </div>
@@ -335,7 +335,7 @@ export default {
         margin-left: 5px;
     }
 
-    .alert-success {
+    .alert-info {
         width: 101%;
     }
 </style>
