@@ -29,7 +29,7 @@ export default {
         background-image: url('../assets/landing.jpg');
         background-repeat: no-repeat;
         background-size: cover;
-        height: 400px;
+        height: 60vh;
     }
 
     .bg-gradient {
