@@ -1,7 +1,7 @@
 <template>
     <div class="container pt-5">
         <div class="row" v-if="loaded">
-            <div class="offset-md-3 col-md-6 text-center" v-if="!collaborations.length">En este momento no hay colaboraciones</div>
+            <div class="offset-md-3 col-md-6 text-center message" v-if="!collaborations.length">En este momento no hay colaboraciones</div>
             <div v-else
                 v-for="collaboration in collaborations"
                 :key="collaboration.id"
